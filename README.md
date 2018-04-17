@@ -13,3 +13,9 @@
 
 这种错误一般都是因为对应的loader版本有问题，可以卸载重装
 
+
+`Error: Path variable [contenthash] not implemented in this context: style/[name].[contenthash].css`
+
+    new ExtractPlugin('styles.[contentHash:8].css')
+    这种写法最新版本的extract-text-webpack-plugin不再支持
+    暂时使用new ExtractPlugin('styles.[md5:contentHash:hex:8].css')
