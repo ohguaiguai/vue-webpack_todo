@@ -4,6 +4,8 @@ const createVueLoaderOptions = require('./vue-loader.config');
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
+    // webpack会自动在生产环境下进行代码的优化、压缩
+    mode: process.env.NODE_ENV || 'production',
     target: 'web',
     entry: path.join(__dirname, '../client/index.js'),
     output: {
