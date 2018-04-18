@@ -1,7 +1,13 @@
 {
+  // 使用第三方标准库
   "extends": "standard",
+  // 识别.vue文件中的js
   "plugins": [
     "html"
   ],
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "no-new": 0,
+    "spaced-comment": 0
+  }
 }
