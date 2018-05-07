@@ -1,6 +1,7 @@
 {
   "presets": [
-    "env"
+    "env", // 只能使用已经定稿的语法
+    "stage-1" // 可以使用最新的语法
   ],
   "plugins": [
     "transform-vue-jsx"

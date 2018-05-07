@@ -5,9 +5,12 @@
   "plugins": [
     "html"
   ],
+  // 识别es6
   "parser": "babel-eslint",
   "rules": {
     "no-new": 0,
-    "spaced-comment": 0
+    "spaced-comment": 0,
+    "space-before-function-paren": 0,
+    "indent": 0
   }
 }

@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HTMLPlugin = require('html-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
+const VueClientPlugin = require('vue-server-renderer/client-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
@@ -16,7 +17,8 @@ const defaultPlugins = [
             NODE_ENV: isDev ? '"development"' : '"production"'
         }
     }),
-    new HTMLPlugin()
+    new HTMLPlugin(),
+    new VueClientPlugin()
 ];
 
 const devServer = {
@@ -24,6 +26,11 @@ const devServer = {
     host: '0.0.0.0',
     overlay: {
         errors: true,
+    },
+    // 当路由使用的是history模式时
+    historyApiFallback: {
+        // 这里的写法是和webpack.config.base.js中的output的publicPath属性相关的
+      index: '/public/index.html'
     },
     hot: true
 };
@@ -63,11 +70,12 @@ if (isDev) {
     // 生产坏境的配置
     config = merge(baseConfig, {
         entry: {
-            app: path.join(__dirname, '../client/index.js'),
+            app: path.join(__dirname, '../client/client-entry.js'),
             vendor: ['vue']
         },
         output: {
-            filename: '[name].[chunkhash:8].js'
+            filename: '[name].[chunkhash:8].js',
+            publicPath: '/public/' //去掉前面的端口、域名
         },
         module: {
             rules: [

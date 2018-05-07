@@ -6,7 +6,14 @@ import Vue from 'vue'
 })*/
 
 const app = new Vue({
-  template: '<div>thi sis </div>'
+  el: '#root',
+  template: '<div>thi sis </div>',
+  render (h) {
+    throw new TypeError('render error')
+  },
+  renderError (h, err) {
+    return h('div', {}, err.stack)
+  }
 })
 
 app.$mount('#root')

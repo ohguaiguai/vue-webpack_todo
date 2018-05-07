@@ -13,9 +13,9 @@
              @del="deleteTodo" 接收子组件要触发的del方法
         -->
         <v-item :todo="todo"
-                  v-for="todo in filteredTodos"
-                  :key="todo.id"
-                  @del="deleteTodo"
+                v-for="todo in filteredTodos"
+                :key="todo.id"
+                @del="deleteTodo"
         >
         </v-item>
         <!--
@@ -27,9 +27,9 @@
 
         <!-- 使用tabs组件 -->
         <v-tabs :filter="filter"
-                  :todos="todos"
-                  @toggle="toggleFilter"
-                  @clearAllCompleted="clearAllCompleted"
+                :todos="todos"
+                @toggle="toggleFilter"
+                @clearAllCompleted="clearAllCompleted"
         >
         </v-tabs>
     </section>
@@ -42,58 +42,64 @@
     let id = 0
 
     export default {
-      // data() 声明数据
-      data () {
-        return {
-          todos: [],
-          filter: 'all'
-        }
-      },
-
-      // 计算
-      computed: {
-        filteredTodos () {
-          if (this.filter === 'all') {
-            return this.todos
-          }
-          const completed = this.filter === 'completed'
-
-          // 将todos数组中，completed为true的值过滤出来，并返回一个新数组
-          return this.todos.filter(todo => completed === todo.completed)
-        }
-      },
-
-      // 组件
-      components: {
-        vItem,
-        vTabs
-      },
-
-      // 方法
-      methods: {
-        addTodo (e) {
-          if (e.target.value.trim()) {
-            this.todos.unshift({
-              id: id++,
-              content: e.target.value.trim(),
-              completed: false
-            })
-            e.target.value = ''
-          } else {
-            // alert('傻X，输入不能为空 !-_-')
-          }
+        metaInfo: {
+          title: 'this is todo app'
         },
-        deleteTodo (id) {
-          this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+        props: ['id'],
+        // data() 声明数据
+        data() {
+            return {
+                todos: [],
+                filter: 'all'
+            }
         },
-        toggleFilter (state) {
-          this.filter = state
+        mounted() {
+          console.log(this.id)
         },
-        clearAllCompleted () {
-          // 给todos赋一个新的值（即todo.completed为false的值）
-          this.todos = this.todos.filter(todo => todo.completed === false)
+        // 计算
+        computed: {
+            filteredTodos() {
+                if (this.filter === 'all') {
+                    return this.todos
+                }
+                const completed = this.filter === 'completed'
+
+                // 将todos数组中，completed为true的值过滤出来，并返回一个新数组
+                return this.todos.filter(todo => completed === todo.completed)
+            }
+        },
+
+        // 组件
+        components: {
+            vItem,
+            vTabs
+        },
+
+        // 方法
+        methods: {
+            addTodo(e) {
+                if (e.target.value.trim()) {
+                    this.todos.unshift({
+                        id: id++,
+                        content: e.target.value.trim(),
+                        completed: false
+                    })
+                    e.target.value = ''
+                } else {
+                    // alert('傻X，输入不能为空 !-_-')
+                }
+            },
+            deleteTodo(id) {
+                this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+            },
+            toggleFilter(state) {
+                this.filter = state
+            },
+            clearAllCompleted() {
+                // 给todos赋一个新的值（即todo.completed为false的值）
+                this.todos = this.todos.filter(todo => todo.completed === false)
+            }
         }
-      }
     }
 </script>
 

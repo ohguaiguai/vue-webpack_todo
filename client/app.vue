@@ -3,8 +3,11 @@
     <div id="app">
         <div id="cover"></div>
         <v-header></v-header>
+        <!--<p>{{count}} {{fullName}}</p>-->
+        <router-link to="/app">app</router-link>
+        <router-link to="/login">login</router-link>
+        <router-view />
         <v-footer></v-footer>
-        <v-todo></v-todo>
     </div>
 </template>
 
@@ -12,19 +15,39 @@
     // 引入header.vue组件
     import vHeader from './views/layout/header.vue'
 
-// 引入footer.jsx组件
-import vFooter from './views/layout/footer.jsx'
+    // 引入footer.jsx组件
+    import vFooter from './views/layout/footer.jsx'
 
-// 引入todo.vue组件
-import vTodo from './views/todo/todo.vue'
+    // 引入todo.vue组件
+    import vTodo from './views/todo/todo.vue'
 
-export default {
-      // 声明组件，之后便可以使用组件标签
-      components: {
-        vHeader,
-        vFooter,
-        vTodo
-      }
+    import {mapState, mapGetters, mapMutations} from 'vuex'
+
+    export default {
+        mataInfo: {
+          title: 'this is meta'
+        },
+        // 声明组件，之后便可以使用组件标签
+        components: {
+            vHeader,
+            vFooter,
+            vTodo
+        },
+        mounted() {
+            // let i = 1
+            // setInterval(() => {
+            //     this.updateCount({
+            //         num: i++
+            //     })
+            // }, 1000)
+        },
+        computed: {
+            ...mapState(['count']),
+            ...mapGetters(['fullName'])
+        },
+        methods: {
+            ...mapMutations(['updateCount'])
+        }
     }
 </script>
 
