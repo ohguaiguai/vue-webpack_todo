@@ -2,6 +2,7 @@
   "presets": [
     "env"
   ],
+    // 识别jsx
   "plugins": [
     "transform-vue-jsx"
   ]

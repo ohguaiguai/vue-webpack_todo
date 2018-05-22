@@ -1,5 +1,7 @@
 {
+    // 使用官方提供的标准
   "extends": "standard",
+    // 识别.vue中的js代码
   "plugins": [
     "html"
   ],
