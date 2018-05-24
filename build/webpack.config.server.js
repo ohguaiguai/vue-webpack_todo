@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const ExtractPlugin = require('extract-text-webpack-plugin');
 // 合并不同的webpack配置项
 const merge = require('webpack-merge')
-// 生成一个json文件, 最终要的插件
+// 生成一个json文件, 最重要的插件
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 const baseConfig = require('./webpack.config.base')

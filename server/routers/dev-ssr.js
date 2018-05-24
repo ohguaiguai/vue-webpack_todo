@@ -5,6 +5,7 @@ const fs = require('fs')
 // 和fs的区别是: 不会把文件写入磁盘而是写在内存中
 const MemoryFS = require('memory-fs')
 const webpack = require('webpack')
+// 关键插件
 const VueServerRenderer = require('vue-server-renderer')
 
 const serverRender = require('./server-render')
@@ -13,7 +14,7 @@ const serverConfig = require('../../build/webpack.config.server')
 const serverCompiler = webpack(serverConfig)
 
 const mfs = new MemoryFS()
-// 指定webapck的compiler输出目录在mfs中
+// 指定webapck的compiler输出目录在mfs(内存)中
 serverCompiler.outputFileSystem = mfs
 
 let bundle // 记录每次打包生成的文件
@@ -30,7 +31,7 @@ serverCompiler.watch({}, (err, stats) => {
     )
     // mfs.readFileSync(bundlePath, 'utf-8')返回的是字符串
     bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
-    console.log('new bundle generated')
+    console.log('new bundle has generated successfully.')
 })
 
 // 处理整个服务端返回的内容
